@@ -1,0 +1,46 @@
+{
+  "name": "Character",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Character name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Physical description (appearance, clothing, age, etc.)"
+    },
+    "personality": {
+      "type": "string",
+      "description": "Personality traits and behavior"
+    },
+    "voice_id": {
+      "type": "string",
+      "description": "Associated voice ID for TTS"
+    },
+    "voice_gender": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female"
+      ],
+      "default": "female",
+      "description": "Voice gender"
+    },
+    "avatar_url": {
+      "type": "string",
+      "description": "Optional avatar/reference image URL"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for categorization"
+    }
+  },
+  "required": [
+    "name",
+    "description"
+  ]
+}

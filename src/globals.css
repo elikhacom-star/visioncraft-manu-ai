@@ -1,0 +1,45 @@
+/* Mobile safe area handling */
+.mobile-header-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.mobile-bottom-nav {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.mobile-bottom-spacer {
+  height: calc(3.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Disable overscroll bounce */
+html, body {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Disable text selection on interactive elements */
+button, a, nav, [role="button"], .select-none {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Minimum tap target for icon-only buttons on mobile */
+@media (max-width: 767px) {
+  button[data-size="icon"],
+  [role="button"] > svg:only-child {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .tap-target {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Safe area padding for bottom sheet */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}

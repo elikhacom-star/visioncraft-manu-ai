@@ -1,0 +1,21 @@
+{
+  "name": "ActivityLog",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "description": "Type of action (e.g., login, generate_video, update_user)"
+    },
+    "details": {
+      "type": "string",
+      "description": "Human readable description of the action"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Technical details (JSON)"
+    }
+  },
+  "required": [
+    "action"
+  ]
+}

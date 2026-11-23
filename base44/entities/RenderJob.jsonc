@@ -1,0 +1,76 @@
+{
+  "name": "RenderJob",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "Related project ID"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "processing",
+        "completed",
+        "failed"
+      ],
+      "default": "queued",
+      "description": "Current render status"
+    },
+    "progress": {
+      "type": "number",
+      "default": 0,
+      "description": "Progress percentage 0-100"
+    },
+    "resolution": {
+      "type": "string",
+      "enum": [
+        "720p",
+        "1080p",
+        "4k"
+      ],
+      "default": "1080p"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "mp4",
+        "webm"
+      ],
+      "default": "mp4"
+    },
+    "scene_count": {
+      "type": "integer",
+      "description": "Number of scenes to render"
+    },
+    "total_duration": {
+      "type": "number",
+      "description": "Estimated total duration in seconds"
+    },
+    "scenes_data": {
+      "type": "object",
+      "description": "Serialized scene data for rendering"
+    },
+    "output_url": {
+      "type": "string",
+      "description": "URL of the final rendered video"
+    },
+    "error_message": {
+      "type": "string",
+      "description": "Error message if render failed"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When processing started"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When processing completed"
+    }
+  },
+  "required": [
+    "status"
+  ]
+}

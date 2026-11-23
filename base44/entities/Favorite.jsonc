@@ -1,0 +1,43 @@
+{
+  "name": "Favorite",
+  "type": "object",
+  "properties": {
+    "item_type": {
+      "type": "string",
+      "enum": [
+        "template",
+        "scene"
+      ],
+      "description": "Type of favorited item"
+    },
+    "item_id": {
+      "type": "string",
+      "description": "ID of the favorited item (template ID or scene image URL)"
+    },
+    "item_name": {
+      "type": "string",
+      "description": "Display name of the favorited item"
+    },
+    "item_description": {
+      "type": "string",
+      "description": "Description or dialogue of the item"
+    },
+    "item_category": {
+      "type": "string",
+      "description": "Category of the item"
+    },
+    "item_thumbnail": {
+      "type": "string",
+      "description": "Thumbnail URL for scenes"
+    },
+    "item_data": {
+      "type": "object",
+      "description": "Full item data snapshot for quick access"
+    }
+  },
+  "required": [
+    "item_type",
+    "item_id",
+    "item_name"
+  ]
+}

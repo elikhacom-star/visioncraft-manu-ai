@@ -1,0 +1,44 @@
+{
+  "name": "VoicePreset",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the preset"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the voice style"
+    },
+    "provider": {
+      "type": "string",
+      "enum": [
+        "openai",
+        "elevenlabs",
+        "google",
+        "other"
+      ],
+      "default": "elevenlabs"
+    },
+    "voice_id": {
+      "type": "string",
+      "description": "The ID of the voice (e.g. ElevenLabs Voice ID)"
+    },
+    "settings": {
+      "type": "object",
+      "description": "JSON object containing stability, similarity_boost, style, etc."
+    },
+    "category": {
+      "type": "string",
+      "default": "Custom"
+    },
+    "is_system": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "name",
+    "voice_id"
+  ]
+}

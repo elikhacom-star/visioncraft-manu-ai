@@ -1,0 +1,42 @@
+{
+  "name": "AudioCreation",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Short title or label for the audio"
+    },
+    "source_text": {
+      "type": "string",
+      "description": "The original text used for TTS generation"
+    },
+    "language": {
+      "type": "string",
+      "description": "Language code used"
+    },
+    "voice": {
+      "type": "string",
+      "description": "Voice ID or name used"
+    },
+    "provider": {
+      "type": "string",
+      "description": "TTS provider (openai, elevenlabs, etc.)"
+    },
+    "audio_url": {
+      "type": "string",
+      "description": "URL of the uploaded audio file"
+    },
+    "duration_seconds": {
+      "type": "number",
+      "description": "Estimated duration in seconds"
+    },
+    "project_name": {
+      "type": "string",
+      "description": "Related project name if any"
+    }
+  },
+  "required": [
+    "source_text",
+    "audio_url"
+  ]
+}

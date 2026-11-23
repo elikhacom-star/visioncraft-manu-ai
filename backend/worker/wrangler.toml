@@ -1,0 +1,22 @@
+name = "visioncraft-video-api"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+[vars]
+FRONTEND_ORIGIN = "https://visioncraft-ai.pages.dev"
+DAILY_LIMIT = "1"
+# Configure these model identifiers in the Cloudflare dashboard or override them here.
+# For non-official Replicate models use the full version ID.
+REPLICATE_I2V_MODEL = "wavespeedai/wan-2.1-i2v-480p"
+REPLICATE_T2V_MODEL = "minimax/video-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "visioncraft-video"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+# Secrets (never commit values):
+# npx wrangler secret put REPLICATE_API_TOKEN
+# npx wrangler secret put RESEND_API_KEY
+# npx wrangler secret put EMAIL_FROM
+# npx wrangler secret put EMAIL_HASH_SECRET

@@ -1,0 +1,41 @@
+{
+  "name": "SavedStoryboard",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the saved storyboard"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description"
+    },
+    "scene_count": {
+      "type": "integer",
+      "description": "Number of scenes"
+    },
+    "total_duration": {
+      "type": "number",
+      "description": "Total duration in seconds"
+    },
+    "storyboard_data": {
+      "type": "object",
+      "description": "Full storyboard JSON (title, scenes array, etc.)"
+    },
+    "original_script": {
+      "type": "string",
+      "description": "The script used to generate this storyboard"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for organization"
+    }
+  },
+  "required": [
+    "name",
+    "storyboard_data"
+  ]
+}

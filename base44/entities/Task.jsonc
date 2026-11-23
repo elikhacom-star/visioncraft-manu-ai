@@ -1,0 +1,59 @@
+{
+  "name": "Task",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "Related Project ID"
+    },
+    "title": {
+      "type": "string",
+      "description": "Task title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Task details"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "todo",
+        "in_progress",
+        "done"
+      ],
+      "default": "todo",
+      "description": "Task status"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "default": "medium"
+    },
+    "estimated_minutes": {
+      "type": "number",
+      "description": "Estimated time in minutes"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "Assignee email"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "project_id",
+    "title"
+  ]
+}

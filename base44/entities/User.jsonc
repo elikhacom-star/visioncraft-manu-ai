@@ -1,0 +1,28 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "subscription_plan": {
+      "type": "string",
+      "enum": [
+        "free",
+        "pro",
+        "enterprise"
+      ],
+      "default": "free",
+      "description": "User's subscription tier"
+    },
+    "monthly_video_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of videos generated this month"
+    },
+    "last_reset_date": {
+      "type": "string",
+      "description": "Date when the monthly count was last reset (ISO format)"
+    }
+  },
+  "required": [
+    "last_reset_date"
+  ]
+}

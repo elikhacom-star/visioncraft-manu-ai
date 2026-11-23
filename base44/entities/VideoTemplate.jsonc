@@ -1,0 +1,52 @@
+{
+  "name": "VideoTemplate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the template"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Business",
+        "Social Media",
+        "Personal",
+        "Education",
+        "Marketing",
+        "Showcase",
+        "Other"
+      ],
+      "default": "Business"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for search and filtering"
+    },
+    "icon_name": {
+      "type": "string",
+      "description": "Lucide icon name"
+    },
+    "system_prompt_addendum": {
+      "type": "string",
+      "description": "Instructions for the AI"
+    },
+    "is_system": {
+      "type": "boolean",
+      "default": false,
+      "description": "True for built-in global templates"
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "system_prompt_addendum"
+  ]
+}

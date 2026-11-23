@@ -1,0 +1,25 @@
+{
+  "name": "ProjectFolder",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Folder name"
+    },
+    "color": {
+      "type": "string",
+      "description": "Optional color hex for display"
+    },
+    "icon": {
+      "type": "string",
+      "description": "Optional lucide icon name"
+    },
+    "parent_id": {
+      "type": "string",
+      "description": "Optional parent folder ID for nesting"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

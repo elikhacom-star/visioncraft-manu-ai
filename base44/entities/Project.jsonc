@@ -1,0 +1,65 @@
+{
+  "name": "Project",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Project name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "completed"
+      ],
+      "default": "draft"
+    },
+    "script": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "settings": {
+      "type": "object",
+      "description": "Stored settings like template, colors, etc."
+    },
+    "storyboard_data": {
+      "type": "object",
+      "description": "Full storyboard JSON"
+    },
+    "generated_images": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "List of generated image objects"
+    },
+    "final_video_url": {
+      "type": "string",
+      "description": "URL of the uploaded final video"
+    },
+    "thumbnail_url": {
+      "type": "string",
+      "description": "Thumbnail image URL for quick preview"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Project tags for organization and search"
+    },
+    "folder_id": {
+      "type": "string",
+      "description": "ID of the folder containing this project"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}
