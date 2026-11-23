@@ -2,14 +2,16 @@ name: Deploy VisionCraft
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
   contents: read
+  deployments: write
 
 concurrency:
-  group: production-deploy
+  group: visioncraft-production-deploy
   cancel-in-progress: true
 
 jobs:
@@ -17,13 +19,13 @@ jobs:
     name: Build and deploy Cloudflare Pages
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -36,25 +38,27 @@ jobs:
           VITE_BASE44_APP_ID: ${{ vars.BASE44_APP_ID }}
           VITE_BASE44_APP_BASE_URL: ${{ vars.BASE44_APP_BASE_URL }}
 
-      - name: Deploy Pages
-        uses: cloudflare/wrangler-action@v3
+      - name: Deploy frontend to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name visioncraft-ai --branch main
+          command: pages deploy dist --project-name=visioncraft-ai --branch=main
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-worker:
     name: Deploy secure video Worker
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' || contains(join(github.event.commits.*.modified, ' '), 'backend/worker/') || contains(join(github.event.commits.*.added, ' '), 'backend/worker/')
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy Worker
-        uses: cloudflare/wrangler-action@v3
+      - name: Deploy secure video Worker
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: backend/worker
           command: deploy
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
