@@ -1,4 +1,4 @@
-name: Deploy VisionCraft
+name: Deploy VisionCraft to GitHub Pages
 
 on:
   push:
@@ -8,15 +8,19 @@ on:
 
 permissions:
   contents: read
-  deployments: write
+  pages: write
+  id-token: write
 
 concurrency:
-  group: visioncraft-production-deploy
+  group: github-pages
   cancel-in-progress: true
 
+env:
+  VITE_BASE_PATH: /visioncraft-manu-ai/
+
 jobs:
-  deploy-pages:
-    name: Build and deploy Cloudflare Pages
+  build:
+    name: Build frontend
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -38,27 +42,19 @@ jobs:
           VITE_BASE44_APP_ID: ${{ vars.BASE44_APP_ID }}
           VITE_BASE44_APP_BASE_URL: ${{ vars.BASE44_APP_BASE_URL }}
 
-      - name: Deploy frontend to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v4
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=visioncraft-ai --branch=main
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          path: dist
 
-  deploy-worker:
-    name: Deploy secure video Worker
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || contains(join(github.event.commits.*.modified, ' '), 'backend/worker/') || contains(join(github.event.commits.*.added, ' '), 'backend/worker/')
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Deploy secure video Worker
-        uses: cloudflare/wrangler-action@v4
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: backend/worker
-          command: deploy
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
