@@ -21,6 +21,14 @@ export const AuthProvider = ({ children }) => {
     try {
       setIsLoadingPublicSettings(true);
       setAuthError(null);
+      // GitHub Pages can serve the public shell before Base44 is configured.
+      // Avoid redirecting to a non-existent Base44 route in that case.
+      if (!appParams.appId || !appParams.serverUrl) {
+        setIsLoadingPublicSettings(false);
+        setIsLoadingAuth(false);
+        setIsAuthenticated(false);
+        return;
+      }
       
       // First, check app public settings (with token if available)
       // This will tell us if auth is required, user not registered, etc.
