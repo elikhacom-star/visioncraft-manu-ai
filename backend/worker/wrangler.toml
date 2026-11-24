@@ -1,9 +1,10 @@
 name = "visioncraft-video-api"
 main = "src/index.js"
 compatibility_date = "2026-11-01"
+compatibility_flags = ["nodejs_compat"]
 
 [vars]
-FRONTEND_ORIGIN = "https://visioncraft-ai.pages.dev"
+FRONTEND_ORIGIN = "https://elikhacom-star.github.io"
 DAILY_LIMIT = "1"
 # Configure these model identifiers in the Cloudflare dashboard or override them here.
 # For non-official Replicate models use the full version ID.
@@ -14,6 +15,17 @@ REPLICATE_T2V_MODEL = "minimax/video-01"
 binding = "DB"
 database_name = "visioncraft-video"
 database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+
+[observability.traces]
+enabled = true
+head_sampling_rate = 0.01
 
 # Secrets (never commit values):
 # npx wrangler secret put REPLICATE_API_TOKEN

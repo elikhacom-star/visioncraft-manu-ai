@@ -79,7 +79,9 @@ async function handle(request, env) {
     const emailId = await hmac(normalized, env.EMAIL_HASH_SECRET);
     const recent = await env.DB.prepare('SELECT created_at FROM verification_codes WHERE email_id = ?').bind(emailId).first();
     if (recent && now() - recent.created_at < 60) return json({ code: 'RATE_LIMITED', message: 'Veuillez patienter avant de demander un nouveau code.' }, 429, origin);
-    const code = String(Math.floor(100000 + Math.random() * 900000));
+    const random = new Uint32Array(1);
+    crypto.getRandomValues(random);
+    const code = String(100000 + (random[0] % 900000));
     await env.DB.prepare('INSERT OR REPLACE INTO verification_codes(email_id, code_hash, expires_at, attempts, created_at) VALUES (?, ?, ?, 0, ?)').bind(emailId, await digest(code), now() + 600, now()).run();
     try { await sendCode(normalized, code, env); } catch (_) { return json({ code: 'EMAIL_ERROR', message: 'Impossible d’envoyer le code pour le moment.' }, 502, origin); }
     return json({ ok: true, message: 'Si cette adresse est valide, un code a été envoyé.' }, 200, origin);
